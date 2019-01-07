@@ -19,7 +19,7 @@ Currently, the implementation only allows you to login to your server.
 
 Going forward...I have a few ideas for this app...
 
-- [ ] Allow upload and download of files via the [ssh]() package.
+- [ ] Allow upload and download of files via the [ssh](https://github.com/ropensci/ssh) package.
 - [ ] Allow users to view contents of their files.
 - [ ] Allow file operations such as deletion or creation.
 - [ ] Allow users to perform other commands via ssh.
