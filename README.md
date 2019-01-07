@@ -19,10 +19,10 @@ Currently, the implementation only allows you to login to your server.
 
 Going forward...I have a few ideas for this app...
 
-- [] Allow upload and download of files via the [ssh]() package.
-- [] Allow users to view contents of their files.
-- [] Allow file operations such as deletion or creation.
-- [] Allow users to perform other commands via ssh.
+- [ ] Allow upload and download of files via the [ssh]() package.
+- [ ] Allow users to view contents of their files.
+- [ ] Allow file operations such as deletion or creation.
+- [ ] Allow users to perform other commands via ssh.
 
 ## Author
 
@@ -30,4 +30,4 @@ Shaurita Hutchins · [@sdhutchins](https://github.com/sdhutchins) · [:email:](m
 
 ## License
 
-[MIT](https://github.com/sdhutchins/shinySSH/blob/master/LICENSE)
+[MIT](https://github.com/sdhutchins/shinySCP/blob/master/LICENSE)
