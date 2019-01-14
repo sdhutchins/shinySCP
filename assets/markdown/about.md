@@ -1,6 +1,6 @@
 ## What is shinySCP?
 
-`shinySCP` is a shiny app built for fun to mimic existing SCP apps such as WinSCP or FileZilla. It depends upon the `shiny`, `shinythemes`, and `ssh`packages.
+`shinySCP` is a shiny app built for fun to mimic existing SCP apps such as WinSCP or FileZilla. It depends upon the `shiny`, `shinythemes`, and `ssh` packages.
 
 ## Why shinySCP?
 
