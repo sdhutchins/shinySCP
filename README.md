@@ -30,4 +30,4 @@ Shaurita Hutchins · [@sdhutchins](https://github.com/sdhutchins) · [:email:](m
 
 ## License
 
-[MIT](https://github.com/sdhutchins/shinySSH/blob/master/LICENSE)
+[MIT](https://github.com/sdhutchins/shinySCP/blob/master/LICENSE)
