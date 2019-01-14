@@ -8,8 +8,12 @@ library(shinythemes)
 source("helpers.R")
 
 # Define UI for application that logs into a server.
-ui <- navbarPage("shinySCP",
-                 theme = shinytheme("yeti"),
+ui <- navbarPage(
+  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Cabin|Oxygen+Mono|Roboto+Mono|Share+Tech+Mono|Source+Code+Pro"
+  ),
+  tags$style("* {font-family: 'Cabin', sans-serif !important;}", type = "text/css")),
+  title = "shinySCP",
+  theme = shinytheme("yeti"),
 
   # Application title
   tabPanel(
@@ -17,10 +21,10 @@ ui <- navbarPage("shinySCP",
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
-      sidebarPanel(
-        textInput("username", label = h3("Username"), value = ""),
-        textInput("server", label = h3("Server"), value = ""),
-        textInput("password", label = h3("Password"), value = ""),
+      sidebarPanel(tags$style(".well {background-color: #fff;}", type = "text/css"),
+        textInput("username", label = h4("Username"), value = ""),
+        textInput("server", label = h4("Server"), value = ""),
+        textInput("password", label = h4("Password"), value = ""),
         actionButton("submit", "Log in"),
         actionButton("reset", "Clear"),
         actionButton("logout", "Disconnect"),
@@ -33,8 +37,10 @@ ui <- navbarPage("shinySCP",
         textOutput("session")
       )
     )
-  ), tabPanel("About",
-              includeMarkdown("assets/markdown/about.md"))
+  ), tabPanel(
+    "About",
+    tags$div(class = "container-fluid", includeMarkdown("assets/markdown/about.md"))
+  )
 )
 
 # Define server logic required to login to a server
