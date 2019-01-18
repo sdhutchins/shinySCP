@@ -5,41 +5,49 @@
 
 library(shiny)
 library(shinythemes)
+library(shinyjs)
+library(fontawesome)
 source("helpers.R")
 
 # Define UI for application that logs into a server.
 ui <- navbarPage(
-  tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Cabin|Oxygen+Mono|Roboto+Mono|Share+Tech+Mono|Source+Code+Pro"
-  ),
-  tags$style("* {font-family: 'Cabin', sans-serif !important;}", type = "text/css")),
+  header = tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "https://fonts.googleapis.com/css?family=Cabin|Oxygen+Mono|Roboto+Mono|Share+Tech+Mono|Source+Code+Pro"),
+                     tags$style("* {font-family: 'Cabin', sans-serif !important;}", type = "text/css"),
+                     tags$style(".fa, .far, .fas {font-family: 'Font Awesome 5 Free' !important;}", type = "text/css")),
+  id = "main-nav",
   title = "shinySCP",
   theme = shinytheme("yeti"),
+  collapsible = TRUE,
+  # footer = tags$div(tags$p('<center>Made by Shaurita. D. Hutchins</center>')),
 
-  # Application title
+  # Login Page
   tabPanel(
-    "SSH Login",
-
+    title = "Login",
     # Sidebar with a slider input for number of bins
-    sidebarLayout(
-      sidebarPanel(tags$style(".well {background-color: #fff;}", type = "text/css"),
-        textInput("username", label = h4("Username"), value = ""),
-        textInput("server", label = h4("Server"), value = ""),
-        textInput("password", label = h4("Password"), value = ""),
-        actionButton("submit", "Log in"),
-        actionButton("reset", "Clear"),
-        actionButton("logout", "Disconnect"),
-        width = 3
-      ),
-
-      # Show files/directories
-      mainPanel(
-        # TODO: Print the session information
-        textOutput("session")
-      )
+    fluidRow(column(12,
+      align = "center",
+      tags$h2("Login to a server"),
+      tags$br(),
+      textInput("username", label = h4("Username"), value = ""),
+      textInput("server", label = h4("Server"), value = ""),
+      textInput("password", label = h4("Password"), value = ""),
+      actionButton("submit", "Login"),
+      actionButton("reset", "Clear"),
+      tags$br(),
+      textOutput("session")
+      # actionButton("logout", "Disconnect"),
+    ))
+  ),
+  # About Page
+  tabPanel(
+    title = "About",
+    fluidRow(
+      column(3),
+      column(6,
+      align = "left",
+      tags$div(class = "container-fluid", includeMarkdown("assets/markdown/about.md"))),
+      column(3)
     )
-  ), tabPanel(
-    "About",
-    tags$div(class = "container-fluid", includeMarkdown("assets/markdown/about.md"))
   )
 )
 
