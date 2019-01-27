@@ -6,7 +6,6 @@
 library(shiny)
 library(shinythemes)
 library(shinyjs)
-library(fontawesome)
 source("helpers.R")
 
 # Define UI for application that logs into a server.
@@ -24,8 +23,10 @@ ui <- navbarPage(
   tabPanel(
     title = "Login",
     # Sidebar with a slider input for number of bins
-    fluidRow(column(12,
+    fluidRow(column(4),
+             column(4,
       align = "center",
+      tags$div(class = "well",
       tags$h2("Login to a server"),
       tags$br(),
       textInput("username", label = h4("Username"), value = ""),
@@ -34,9 +35,10 @@ ui <- navbarPage(
       actionButton("submit", "Login"),
       actionButton("reset", "Clear"),
       tags$br(),
-      textOutput("session")
-      # actionButton("logout", "Disconnect"),
-    ))
+      tags$br(),
+      textOutput("session"))
+    ),
+    column(4))
   ),
   # About Page
   tabPanel(
@@ -68,8 +70,9 @@ server <- function(input, output, session) {
   })
 
   output$session <- renderPrint({
-    if (is.null(x$username) | is.null(x$server) | is.null(x$password)) return(NULL)
+    if (!is.null(x$username) | !is.null(x$server) | !is.null(x$password)) (
     connect(x$username, x$server, x$password)
+    )
   })
 }
 
