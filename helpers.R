@@ -3,9 +3,14 @@ library(ssh)
 
 connect <- function(username, server, password) {
   if (is.null(password)) {
-    session <- ssh_connect(paste0(username, "@", server), verbose = 4)
+    tryCatch(ssh_connect(paste0(username, "@", server), verbose = 0), 
+                        error = function(c) {
+                          c$message <-  paste0("Unsuccessful connection.")
+                          stop(c)})
   } else {
-    session <- ssh_connect(paste0(username, "@", server), passwd = password, verbose = 4)
+    tryCatch(ssh_connect(paste0(username, "@", server), passwd = password, verbose = 0), 
+             error = function(c) {
+               c$message <-  paste0("Unsuccessful connection.")
+               stop(c)})
   }
-  return(session)
 }
