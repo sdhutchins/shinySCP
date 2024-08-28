@@ -54,7 +54,7 @@ ui <- navbarPage(
       column(3),
       column(6,
         align = "left",
-        tags$div(class = "container-fluid", includeMarkdown("assets/markdown/about.md"))
+        tags$div(class = "container-fluid", includeMarkdown("about.md"))
       ),
       column(3)
     )
