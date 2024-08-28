@@ -6,6 +6,7 @@
 library(shiny)
 library(shinythemes)
 library(shinyjs)
+library(markdown)
 source("helpers.R")
 
 # Define UI for application that logs into a server.
