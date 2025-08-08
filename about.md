@@ -16,7 +16,7 @@ Of course, please check out the [repository](https://github.com/sdhutchins/shiny
 
 ## What's next for shinySCP?
 
-Currently, the implementation only allows you to login to your server.
+Currently, the implementation only allows you to login to your server and view files.
 
 Going forward...I have a few ideas for this app...
 
@@ -24,4 +24,3 @@ Going forward...I have a few ideas for this app...
 2. Allow users to view contents of their files.
 3. Allow file operations such as deletion or creation.
 4. Allow users to perform other commands via ssh.
-

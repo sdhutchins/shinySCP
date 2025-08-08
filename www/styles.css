@@ -1,0 +1,178 @@
+/* General font styles */
+* {
+  font-family: 'Cabin', sans-serif !important;
+}
+
+.fa, .far, .fas, .fab {
+  font-family: 'Font Awesome 5 Free' !important;
+}
+
+.fab {
+  font-family: 'Font Awesome 5 Brands' !important;
+}
+
+/* GitHub icon styles */
+.navbar .pull-right a:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Main container styles */
+.main-container {
+  background: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Panel styles - consistent for both sides */
+.panel {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 25px;
+  height: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.panel h2 {
+  color: #495057;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* File browser styles */
+.file-browser { 
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.file-browser.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* Connection status styles */
+.connection-status {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.connection-status.connected {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.connection-status.disconnected {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.connection-status.initial {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-color: #bee5eb;
+}
+
+/* File list container styles */
+.file-list-container {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+  font-family: 'Source Code Pro', monospace !important;
+  font-size: 13px;
+  white-space: pre;
+  border: 1px solid #e9ecef;
+}
+
+.file-list-container pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+}
+
+/* Loading spinner styles */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Button improvements */
+.btn {
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 8px 16px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Input improvements */
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Path input and browse button container */
+.path-container {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.path-input {
+  flex-grow: 1;
+}
+
+.browse-button {
+  margin-bottom: 15px;
+} 
