@@ -1,5 +1,8 @@
 # shinySCP
 
+![Static Badge](https://img.shields.io/badge/demo-rshiny_app-%23be7e8d?style=flat&logo=R&logoColor=white&labelColor=%238a5f73)
+
+
 shinySCP is a shiny app built for fun to mimic existing SCP apps such as WinSCP or FileZilla.
 
 ## Why shinySCP?
@@ -9,7 +12,7 @@ This is just a way for me to learn more about shiny and see one of my ideas come
 ## Requirements
 
 ```r
-pkgs <- c('ssh', 'shiny', 'shinythemes')
+pkgs <- c('ssh', 'shiny', 'shinythemes', 'shinyjs')
 install.packages(pkgs)
 ```
 
@@ -19,7 +22,7 @@ Currently, the implementation only allows you to login to your server.
 
 Going forward...I have a few ideas for this app...
 
-- [ ] Allow directories to be viewed.
+- [x] Allow files/directories to be viewed.
 - [ ] Allow upload and download of files via the [ssh](https://github.com/ropensci/ssh) package.
 - [ ] Allow users to view contents of their files.
 - [ ] Allow file operations such as deletion or creation.
