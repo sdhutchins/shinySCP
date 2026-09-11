@@ -38,18 +38,19 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
         ),
         includeCSS(stylesheet_path),
         tags$script(HTML(
-          "function setLoginLoading(isLoading) {
-          var loginButton = $('#submit');
+          "function setLoginLoading(isLoading, buttonId) {
+          var actionButtonId = buttonId || 'submit';
+          var actionButton = $('#' + actionButtonId);
           var loginControls = $('#login-panel-column :input');
           var loginPanel = $('.login-panel');
 
           if (isLoading) {
-            if (!loginButton.data('idle-html')) {
-              loginButton.data('idle-html', loginButton.html());
+            if (!actionButton.data('idle-html')) {
+              actionButton.data('idle-html', actionButton.html());
             }
 
             loginControls.prop('disabled', true);
-            loginButton
+            actionButton
               .attr('aria-busy', 'true')
               .html(
                 '<span class=\"login-button-spinner\" ' +
@@ -63,9 +64,9 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
           loginControls
             .not('[data-demo-disabled=\"true\"]')
             .prop('disabled', false);
-          loginButton
+          actionButton
             .removeAttr('aria-busy')
-            .html(loginButton.data('idle-html') || 'Login');
+            .html(actionButton.data('idle-html'));
           loginPanel.removeAttr('aria-busy');
           $('body').removeClass('is-connecting');
         }
@@ -101,15 +102,30 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
 
           // Let Shiny record the click before disabling the action button.
           window.setTimeout(function() {
-            setLoginLoading(true);
+            setLoginLoading(true, 'submit');
           }, 0);
+        });
+
+        $(document).on('click', '#try_demo', function() {
+          if ($(this).prop('disabled')) {
+            return;
+          }
+
+          setLoginLoading(true, 'try_demo');
+          window.setTimeout(function() {
+            Shiny.setInputValue(
+              'try_demo',
+              Date.now(),
+              {priority: 'event'}
+            );
+          }, 600);
         });
 
         $(document).on('shiny:connected', function() {
           Shiny.addCustomMessageHandler(
             'set-login-loading',
             function(message) {
-              setLoginLoading(message.active);
+              setLoginLoading(message.active, message.buttonId);
             }
           );
           Shiny.addCustomMessageHandler(
@@ -245,6 +261,22 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
       title = "Home",
       div(
         class = "main-container login-view",
+        if (!ssh_login_enabled) {
+          tags$div(
+            id = "demo-mode-banner",
+            class = "alert alert-info demo-mode-banner",
+            role = "note",
+            tags$i(
+              class = "fas fa-shield-halved demo-mode-icon",
+              role = "presentation",
+              `aria-hidden` = "true"
+            ),
+            tags$div(
+              tags$strong("Demo mode"),
+              tags$p("This app is in demo mode for safety purposes.")
+            )
+          )
+        },
         fluidRow(
           column(
             width = 6,
@@ -252,11 +284,7 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
             id = "login-panel-column",
             tags$div(
               class = "panel login-panel",
-              tags$h2(if (ssh_login_enabled) {
-                "Login to Server"
-              } else {
-                "Explore the Demo"
-              }),
+              tags$h2("Login to Server"),
               tags$div(
                 id = "login-guidance",
                 class = "login-privacy-note",
@@ -266,23 +294,13 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
                   `aria-hidden` = "true"
                 ),
                 tags$p(
-                  if (ssh_login_enabled) {
-                    tagList(
-                      tags$strong("Privacy:"),
-                      paste(
-                        "Your credentials are used only to open this SSH session.",
-                        "shinySCP does not save them to disk."
-                      )
+                  tagList(
+                    tags$strong("Privacy:"),
+                    paste(
+                      "Your credentials are used only to open this SSH session.",
+                      "shinySCP does not save them to disk."
                     )
-                  } else {
-                    tagList(
-                      tags$strong("Demo mode:"),
-                      paste(
-                        "This public demo does not accept or store credentials.",
-                        "Select Try Demo to explore the sample filesystem."
-                      )
-                    )
-                  }
+                  )
                 )
               ),
               htmltools::tagQuery(
@@ -295,7 +313,7 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
                 `aria-describedby` = if (ssh_login_enabled) {
                   "login-guidance login-errors"
                 } else {
-                  "login-guidance"
+                  "demo-mode-banner login-guidance"
                 }
               )$allTags(),
               htmltools::tagQuery(
@@ -307,7 +325,7 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
                 `aria-describedby` = if (ssh_login_enabled) {
                   "login-guidance login-errors"
                 } else {
-                  "login-guidance"
+                  "demo-mode-banner login-guidance"
                 }
               )$allTags(),
               htmltools::tagQuery(
@@ -320,7 +338,7 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
                 `aria-describedby` = if (ssh_login_enabled) {
                   "login-guidance login-errors"
                 } else {
-                  "login-guidance"
+                  "demo-mode-banner login-guidance"
                 }
               )$allTags(),
               tags$div(
@@ -345,11 +363,15 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
                   disabled = if (ssh_login_enabled) NULL else NA,
                   `data-demo-disabled` = if (ssh_login_enabled) NULL else "true"
                 ),
-                actionButton(
-                  "try_demo",
-                  "Try Demo",
-                  icon = icon("folder-open"),
-                  class = if (ssh_login_enabled) "btn-default" else "btn-primary"
+                tags$button(
+                  id = "try_demo",
+                  type = "button",
+                  class = paste(
+                    "btn",
+                    if (ssh_login_enabled) "btn-default" else "btn-primary"
+                  ),
+                  icon("folder-open"),
+                  tags$span("Try Demo")
                 ),
                 htmltools::tagAppendAttributes(
                   actionButton("reset", "Clear", class = "btn-default"),
@@ -562,6 +584,13 @@ shiny_scp_server <- function(
   })
 
   observeEvent(input$try_demo, {
+    on.exit(
+      session$sendCustomMessage(
+        "set-login-loading",
+        list(active = FALSE, buttonId = "try_demo")
+      ),
+      add = TRUE
+    )
     session$sendCustomMessage(
       "set-login-validation",
       list(fields = character(), message = "")
@@ -609,11 +638,7 @@ shiny_scp_server <- function(
 
   output$session <- renderText({
     if (is.null(x$username) && is.null(x$server)) {
-      if (ssh_login_enabled) {
-        "Please enter your credentials to connect"
-      } else {
-        "Select Try Demo to explore the sample filesystem"
-      }
+      "Please enter your credentials to connect"
     } else if (x$is_connected) {
       sprintf("Connected to %s as %s", x$server, x$username)
     } else {

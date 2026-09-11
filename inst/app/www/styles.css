@@ -151,12 +151,44 @@ textarea:focus-visible,
 .main-container.login-view {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .main-container.login-view > .row {
   width: 100%;
   margin-right: 0;
   margin-left: 0;
+}
+
+.demo-mode-banner {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+  margin: 0 0 24px;
+  color: var(--color-heading);
+  background: var(--browser-selected);
+  border-color: var(--color-focus);
+}
+
+.main-container:not(.login-view) > .demo-mode-banner {
+  display: none;
+}
+
+.demo-mode-banner strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.demo-mode-banner p {
+  margin: 0;
+}
+
+.demo-mode-icon {
+  flex: 0 0 auto;
+  color: var(--color-primary);
+  font-size: 20px;
 }
 
 .main-container.login-view #login-panel-column {

@@ -50,7 +50,11 @@ test_that("the app exposes accessible page and login semantics", {
   expect_match(rendered_ui, 'id="main-content" role="main"', fixed = TRUE)
   expect_match(rendered_ui, 'autocomplete="username"', fixed = TRUE)
   expect_match(rendered_ui, 'autocomplete="current-password"', fixed = TRUE)
-  expect_match(rendered_ui, 'aria-describedby="login-guidance"', fixed = TRUE)
+  expect_match(
+    rendered_ui,
+    'aria-describedby="demo-mode-banner login-guidance"',
+    fixed = TRUE
+  )
   expect_match(
     rendered_ui,
     'aria-label="Go to parent directory"',
@@ -59,11 +63,28 @@ test_that("the app exposes accessible page and login semantics", {
   expect_match(rendered_ui, 'class="login-privacy-note"', fixed = TRUE)
   expect_match(rendered_ui, 'id="try_demo"', fixed = TRUE)
   expect_match(rendered_ui, '>Try Demo</span>', fixed = TRUE)
+  expect_match(rendered_ui, ">Login to Server</h2>", fixed = TRUE)
   expect_match(
     rendered_ui,
-    "This public demo does not accept or store credentials.",
+    "This app is in demo mode for safety purposes.",
     fixed = TRUE
   )
+  expect_match(
+    rendered_ui,
+    'class="alert alert-info demo-mode-banner" role="note"',
+    fixed = TRUE
+  )
+  expect_match(
+    rendered_ui,
+    "Your credentials are used only to open this SSH session.",
+    fixed = TRUE
+  )
+  expect_false(grepl("Explore the Demo", rendered_ui, fixed = TRUE))
+  expect_false(grepl(
+    "Select Try Demo to explore the sample filesystem",
+    rendered_ui,
+    fixed = TRUE
+  ))
 })
 
 
@@ -93,6 +114,7 @@ test_that("trusted mode enables SSH login controls", {
   )
 
   expect_false(grepl("disabled", username_input, fixed = TRUE))
+  expect_false(grepl("demo-mode-banner", rendered_ui, fixed = TRUE))
   expect_match(
     rendered_ui,
     "Your credentials are used only to open this SSH session.",

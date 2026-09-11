@@ -77,6 +77,11 @@ test_that("the demo backend rejects unknown directories", {
 test_that("the main server enters demo mode without SSH credentials", {
   with_ssh_login_setting("false", {
     shiny::testServer(shiny_scp_server, {
+      expect_identical(
+        output$session,
+        "Please enter your credentials to connect"
+      )
+
       session$setInputs(try_demo = 1)
       session$flushReact()
 
