@@ -151,8 +151,7 @@ textarea:focus-visible,
 .main-container.login-view {
   display: flex;
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
 }
 
 .main-container.login-view > .row {
@@ -162,11 +161,14 @@ textarea:focus-visible,
 }
 
 .demo-mode-banner {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  left: 24px;
   display: flex;
   align-items: center;
-  width: 100%;
   gap: 12px;
-  margin: 0 0 24px;
+  margin: 0;
   color: var(--color-heading);
   background: var(--browser-selected);
   border-color: var(--color-focus);
@@ -716,6 +718,12 @@ body.is-connecting #login-panel-column * {
 @media (max-width: 767px) {
   .main-container {
     padding: 18px 10px;
+  }
+
+  .demo-mode-banner {
+    top: 18px;
+    right: 10px;
+    left: 10px;
   }
 
   .panel {
