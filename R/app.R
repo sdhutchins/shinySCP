@@ -267,7 +267,7 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
             class = "alert alert-info demo-mode-banner",
             role = "note",
             tags$i(
-              class = "fas fa-shield-halved demo-mode-icon",
+              class = "fas fa-triangle-exclamation demo-mode-icon",
               role = "presentation",
               `aria-hidden` = "true"
             ),

@@ -76,6 +76,11 @@ test_that("the app exposes accessible page and login semantics", {
   )
   expect_match(
     rendered_ui,
+    'class="fas fa-triangle-exclamation demo-mode-icon"',
+    fixed = TRUE
+  )
+  expect_match(
+    rendered_ui,
     "Your credentials are used only to open this SSH session.",
     fixed = TRUE
   )

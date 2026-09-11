@@ -1710,7 +1710,7 @@
       "checksum": "8b76e3d6344683c21ccda57c577469dc"
     },
     "inst/app/www/styles.css": {
-      "checksum": "73248d9653bd0c0fd587ec95f81fe120"
+      "checksum": "33421d27b93b01cadb96ce4e366eb60b"
     },
     "LICENSE": {
       "checksum": "b8fb20950eeab04501608603cc0c775b"
@@ -1725,7 +1725,7 @@
       "checksum": "99d0c907ae4acaefae8d5a06395c09de"
     },
     "R/app.R": {
-      "checksum": "53d684b471cc2a77ef9ec964e67661e4"
+      "checksum": "9451eb03af472d3f0942587ab14c3526"
     },
     "R/demo_backend.R": {
       "checksum": "f4a1058e44c658dbb29984f55968bf17"
