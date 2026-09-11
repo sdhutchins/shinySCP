@@ -22,6 +22,8 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
   if (!nzchar(stylesheet_path) || !nzchar(about_path)) {
     stop("The shinySCP application assets could not be located.", call. = FALSE)
   }
+  about_html <- markdown::mark(about_path, output = NULL)
+  Encoding(about_html) <- "UTF-8"
 
   ui <- navbarPage(
     header = tagList(
@@ -375,7 +377,10 @@ shiny_scp_ui <- function(ssh_login_enabled = ssh_login_is_enabled()) {
         column(3),
         column(6,
           align = "left",
-          tags$div(class = "container-fluid", includeMarkdown(about_path))
+          tags$div(
+            class = "container-fluid",
+            htmltools::HTML(about_html)
+          )
         ),
         column(3)
       )
