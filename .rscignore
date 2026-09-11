@@ -1,0 +1,8 @@
+.Rbuildignore
+.Rprofile
+AGENTS.md
+README.md
+man
+renv
+renv.lock
+tests
