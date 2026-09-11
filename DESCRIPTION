@@ -1,0 +1,27 @@
+Package: shinySCP
+Title: Browse Remote Files over SSH
+Version: 0.0.0.9000
+Authors@R:
+    person(
+        "Shaurita D.", "Hutchins",
+        email = "sdhutchins@outlook.com",
+        role = c("aut", "cre")
+    )
+Description: Provides a demonstration Shiny application for connecting to an
+    SSH server and browsing remote files and directories.
+License: MIT + file LICENSE
+URL: https://github.com/sdhutchins/shinySCP
+BugReports: https://github.com/sdhutchins/shinySCP/issues
+Encoding: UTF-8
+Imports:
+    htmltools,
+    pkgload,
+    shiny,
+    shinyjs,
+    shinythemes,
+    ssh
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.0
